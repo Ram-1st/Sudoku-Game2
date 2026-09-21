@@ -1,0 +1,372 @@
+/* ==========================================
+   1. BASE STYLES & GENERAL
+   ========================================== */
+html {
+  height: 100%;
+  background: 50% 50% no-repeat url('data:image/svg+xml,<svg viewBox="-20 -5 60 40" width="140" xmlns="http://www.w3.org/2000/svg" opacity="0.2"><path d="M1 8l11-7 11 7v8l-11 7-11-7zm0 0l11 8 11-8m0 8L12 8 1 16M12 1v7m0 8v7" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"/><text x="-12" y="32" font-size="5" font-family="monospace" fill="currentColor">Built on CodePen</text></svg>');
+}
+
+body {
+  background-color: #f7f8fa;
+  color: #1f2937;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+}
+
+/* Base Button Styles */
+button {
+  background-color: #2563eb;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.1s ease;
+}
+
+button:hover {
+  opacity: 0.85;
+}
+
+/* Hide inactive screens by default */
+#game,
+#well-done {
+  display: none;
+}
+
+/* ==========================================
+   2. MAIN MENU SCREEN
+   ========================================== */
+#menu {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+#menu header {
+  display: flex;
+  justify-content: flex-end;
+}
+
+h1 {
+  font-size: 42px;
+  margin-bottom: 40px;
+}
+
+#language-button {
+  background-color: transparent;
+  color: #1f2937;
+  border: 1px solid #1f2937;
+  padding: 8px 14px;
+  font-size: 14px;
+}
+
+#language-button.active {
+  background-color: #2563eb;
+  color: #ffffff;
+  border-color: #2563eb;
+}
+
+.difficulty-button {
+  display: block;
+  width: 200px;
+  margin: 12px auto;
+  font-size: 24px;
+}
+
+/* ==========================================
+   3. GAME SCREEN & SUDOKU GRID
+   ========================================== */
+#game {
+  max-width: 500px;
+  width: 100%;
+  margin: 30px auto;
+  text-align: center;
+}
+
+#game h2 {
+  font-size: 34px;
+  margin-bottom: 20px;
+}
+
+/* 9x9 Grid Layout */
+#sudoku-table {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-collapse: collapse;
+  table-layout: fixed;
+  border: 3px solid #1f2937;
+  background-color: #ffffff;
+}
+
+#sudoku-table td {
+  border: 1px solid #9ca3af;
+  height: 45px;
+  font-size: 22px;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* 3x3 Section Thick Borders */
+#sudoku-table tr:nth-child(3) td,
+#sudoku-table tr:nth-child(6) td {
+  border-bottom: 3px solid #1f2937;
+}
+
+#sudoku-table td:nth-child(3),
+#sudoku-table td:nth-child(6) {
+  border-right: 3px solid #1f2937;
+}
+
+/* Selected & Incorrect States (!important overrides JavaScript inline text color) */
+#sudoku-table td.selected {
+  background-color: #2563eb !important;
+  color: #ffffff !important;
+}
+
+#sudoku-table td.wrong {
+  background-color: #dc2626 !important;
+  color: #ffffff !important;
+}
+
+/* ==========================================
+   4. GAME CONTROLS & NUMPAD
+   ========================================== */
+#restart-button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+}
+
+#game-back-button {
+  background-color: transparent;
+  color: #1f2937;
+  border: 1px solid #1f2937;
+  padding: 8px 16px;
+  font-size: 14px;
+}
+
+#game-back-button:hover {
+  background-color: #e5e7eb;
+}
+
+#try-again-button {
+  font-size: 14px;
+  padding: 8px 16px;
+}
+
+/* 5-column Number Keypad */
+#number-buttons {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  width: 100%;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+#number-buttons button {
+  width: 100%;
+  height: 55px;
+  padding: 0;
+  font-size: 20px;
+}
+
+/* Delete (X) Button Placement */
+#delete-cell-button {
+  background-color: #dc2626;
+  grid-column: 5;
+  grid-row: 2;
+}
+
+/* ==========================================
+   5. WELL DONE SCREEN & ILLUSTRATION
+   ========================================== */
+#well-done {
+  text-align: center;
+  max-width: 500px;
+  margin: 40px auto;
+}
+
+#well-done h2 {
+  font-size: 42px;
+  margin-bottom: 20px;
+  color: #2563eb;
+}
+
+#well-done p {
+  font-size: 18px;
+  margin: 10px 0;
+}
+
+#well-done p:first-of-type {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+#well-done p:last-of-type {
+  color: #6b7280;
+}
+
+#play-again-button,
+#back-menu-button {
+  display: block;
+  margin: 10px auto;
+  padding: 12px 24px;
+  font-size: 16px;
+  width: 220px;
+}
+
+#back-menu-button {
+  background-color: #6b7280;
+}
+
+#play-again-button:hover,
+#back-menu-button:hover {
+  transform: scale(1.04);
+}
+
+/* Mini Grid Victory Illustration */
+.illustration-container {
+  position: relative;
+  width: 160px;
+  height: 140px;
+  margin: 0 auto 16px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mini-grid {
+  width: 90px;
+  height: 90px;
+  background-color: #ffffff;
+  border: 3px solid #1e293b;
+  border-radius: 8px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  transform: rotate(-8deg);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.cell {
+  border: 1px solid #cbd5e1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: bold;
+  color: #1e293b;
+}
+
+.cell.highlight {
+  background-color: #dbeafe;
+}
+
+.badge {
+  position: absolute;
+  bottom: 12px;
+  right: 20px;
+  width: 44px;
+  height: 44px;
+  background-color: #2563eb;
+  border: 3px solid #ffffff;
+  border-radius: 50%;
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 8px rgba(37, 99, 235, 0.3);
+}
+
+.ray {
+  position: absolute;
+  background-color: #60a5fa;
+  border-radius: 4px;
+}
+
+.ray-top-left {
+  width: 20px;
+  height: 6px;
+  top: 20px;
+  left: 10px;
+  transform: rotate(35deg);
+}
+
+.ray-bottom-left {
+  width: 24px;
+  height: 6px;
+  top: 52px;
+  left: 2px;
+  transform: rotate(10deg);
+}
+
+.ray-top-right {
+  width: 20px;
+  height: 6px;
+  top: 18px;
+  right: 18px;
+  transform: rotate(-35deg);
+}
+
+.ray-bottom-right {
+  width: 24px;
+  height: 6px;
+  top: 48px;
+  right: 4px;
+  transform: rotate(-15deg);
+}
+
+/* ==========================================
+   6. RESPONSIVE STYLES (MOBILE)
+   ========================================== */
+@media (max-width: 600px) {
+  body {
+    padding: 12px;
+  }
+
+  #game {
+    margin-top: 20px;
+  }
+
+  #sudoku-table td {
+    height: auto;
+    font-size: 20px;
+  }
+
+  #number-buttons {
+    gap: 6px;
+  }
+
+  #number-buttons button {
+    height: 50px;
+  }
+}
+/* Mobile-friendly design */
+@media (max-width: 600px) {
+  body {
+    padding: 12px;
+  }
+
+  #game {
+    max-width: 100%;
+  }
+
+  #sudoku-table td {
+    height: auto;
+    aspect-ratio: 1 / 1;
+    font-size: 20px;
+  }
+
+  #number-buttons button {
+    height: 55px;
+    font-size: 20px;
+  }
+}
